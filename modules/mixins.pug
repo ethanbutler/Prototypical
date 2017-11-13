@@ -1,0 +1,30 @@
+mixin tooltip(message, placement, icon)
+  - var i = icon || "info-sign"
+  span(class="glyphicon glyphicon-"+i data-toggle="tooltip" data-placement=p title=message)
+    
+mixin progress(current, total)
+  - amount = (num/total*100)|0
+  .progress
+    .progress-bar(role="progressbar" aria-valuenow=amount aria-valuemin="0" aria-valuemax="100" style="width:"+amount+"%")
+      .sr-only
+        = amount
+        | % Complete
+
+mixin modal(id, header, tooltip, buttons)
+  .modal.fade(tabindex="-1" role="dialog" id=id)
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header
+          button(type="close" class="close", data-dismiss="modal" aria-label="close")
+            span(aria-hidden="true")
+              | &times;
+          h4.modal-title
+            = header
+            if tooltip
+              | &nbsp;
+              +tooltip(tooltip, bottom)
+        .modal-body.clearfix
+          block
+        .modal-footer
+          each className, text in buttons
+            button(type="button" data-dismiss="modal", id=id+"-"+text.toLowerCase().replace(' ', '-') class="btn btn"+className)=text

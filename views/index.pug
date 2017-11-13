@@ -1,0 +1,40 @@
+each views, name in statuses
+  section
+    h2
+      = name
+      | &nbsp;(
+      = (views.length / total * 100)|0
+      | %)
+    table
+      thead
+        th View
+        th Notes
+        th Params
+      each view in views
+        tr
+          td
+            if view.route
+              a(href='/view/'+view.route)= view.title
+              if view.submodules
+                ul
+                  each data in view.submodules
+                    li
+                      a(href="/view/"+view.route+'#'+data.hash)= data.name
+            else
+              span= view.title
+          td 
+            p !{view.notes}
+            if view.docsLink
+              a(href=view.docsLink target="_blank") Documentation
+          td
+            if view.variations
+              form(action="/view/"+view.route)
+                each variation in view.variations
+                  label(title=variation.notes)= variation.param
+                  if variation.opts
+                    select(name=variation.param)
+                      each opt in variation.opts
+                        option(value=opt)= opt
+                  else
+                    input(name=variation.param)
+                input(type="submit" value="Go")

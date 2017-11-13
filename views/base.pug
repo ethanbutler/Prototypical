@@ -1,0 +1,28 @@
+include ../modules/mixins
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= title
+    meta(name="description" content="")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    if css
+      each dep in css
+        link(rel="stylesheet" href='/css/'+dep+'.css')
+  body
+    header !{header}
+    main.container !{inner}
+    footer !{footer}
+    if submodules
+      each data in submodules
+        +modal(data.hash, data.name, data.tooltip, data.buttons)
+          | !{data.submoduleInner}
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    if js
+      each dep in js
+        if(dep.indexOf("http") < 0)
+          script(src='/scripts/'+dep+'.js')
+        else
+          script(src=dep)

@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Sample View",
+    "route": "sample-view",
+    "status": "Pending Review",
+    "notes": "Description of view",
+    "docsLink": "link-to-docs",
+    "js": ["general"],
+    "css": ["general"],
+    "variations": [
+      {
+        "param": "param1",
+        "notes": "Information about parameter"
+      },
+      {
+        "param": "param2",
+        "opts": ["list", "of", "predefined", "options"]
+      }
+    ],
+    "submodules": [
+      {
+        "name": "Submodule",
+        "hash": "submodule",
+        "buttons": {
+          "Button Text": "success disabled",
+          "Cancel": "default"
+        }
+      }
+    ]
+  }
+]
